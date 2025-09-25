@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from typing import Annotated
 from fastapi import Depends, FastAPI
 from sqlalchemy import create_engine
-from sqlmodel import Session
+from sqlalchemy.orm import sessionmaker, Session
 
 from app.tables.base import Base
 
@@ -10,8 +10,9 @@ from app.tables.base import Base
 sqlite_file_name = "database.db"
 sqlite_url = f"sqlite:///{sqlite_file_name}"
 
-connect_args = {"check_same_thread": False}
-engine = create_engine(sqlite_url, connect_args=connect_args)
+engine = create_engine(sqlite_url, connect_args={"check_same_thread": False})
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def create_db_and_tables():
@@ -19,8 +20,11 @@ def create_db_and_tables():
 
 
 def get_session():
-    with Session(engine) as session:
+    session = SessionLocal()
+    try:
         yield session
+    finally:
+        session.close()
 
 
 SessionDep = Annotated[Session, Depends(get_session)]
