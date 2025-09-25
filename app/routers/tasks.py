@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
-from app.main import SessionDep
+from app.database import SessionDep
+
 
 router = APIRouter()
 
