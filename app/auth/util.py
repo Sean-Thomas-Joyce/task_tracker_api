@@ -1,14 +1,8 @@
 import bcrypt
 from datetime import datetime, timedelta, timezone
-import os
-
-from fastapi.security import OAuth2PasswordBearer
 import jwt
 
 from app.auth.constants import ALGORITHM, SECRET_KEY
-
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):

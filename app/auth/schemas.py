@@ -16,3 +16,7 @@ class UserInDB(User):
 class RegisterUser(BaseModel):
     email: str
     password: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None
