@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from app.database import lifespan
 
-from .routers import users, tasks
-
+from app.tasks.router import router as task_router
+from app.auth.router import router as auth_router
 
 app = FastAPI(lifespan=lifespan)
 
 
-app.include_router(users.router)
-app.include_router(tasks.router)
+app.include_router(auth_router)
+app.include_router(task_router)

@@ -4,7 +4,7 @@ from fastapi import Depends, FastAPI
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 
-from app.tables.base import Base
+from app.models import Base
 
 
 sqlite_file_name = "database.db"

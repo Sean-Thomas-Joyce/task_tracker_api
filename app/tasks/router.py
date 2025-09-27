@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
 from app.database import SessionDep
-from app.models import Task as TaskSchema
-from app.tables.models import Task
+from app.tasks.models import Task
+from app.tasks.schemas import Task as TaskSchema
 
 
 router = APIRouter()
