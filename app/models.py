@@ -1,4 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
 
 class Task(BaseModel):
@@ -10,6 +15,14 @@ class Task(BaseModel):
 
 class User(BaseModel):
     id: int | None
-    username: str
     email: str
-    tasks: list[Task]
+    tasks: list[Task] = []
+
+
+class UserInDB(User):
+    hashed_password: str
+
+
+class RegisterUser(BaseModel):
+    email: str
+    password: str
